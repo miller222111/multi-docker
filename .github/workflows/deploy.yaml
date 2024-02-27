@@ -14,18 +14,18 @@ jobs:
       
       # Build test version of React project (can easily add other services here)
       - run: docker build -t cygnetops/react-test -f ./client/Dockerfile.dev ./client
+      # - run: docker build -t cygnetops/react-test -f ./client/Dockerfile.dev ./client
+      # # Run tests on React project test version (can easily add other services here)
+      # - run: docker run -e CI=true cygnetops/react-test npm test
       
-      # Run tests on React project test version (can easily add other services here)
-      - run: docker run -e CI=true cygnetops/react-test npm test
-      
-      # Build Prod versions of all of our projects if tests pass
-      - run: docker build -t cygnetops/multi-client-10-14 ./client
-      - run: docker build -t cygnetops/multi-nginx-10-14 ./nginx
-      - run: docker build -t cygnetops/multi-server-10-14 ./server
-      - run: docker build -t cygnetops/multi-worker-10-14 ./worker
+      # # Build Prod versions of all of our projects if tests pass
+      # - run: docker build -t cygnetops/multi-client-10-14 ./client
+      # - run: docker build -t cygnetops/multi-nginx-10-14 ./nginx
+      # - run: docker build -t cygnetops/multi-server-10-14 ./server
+      # - run: docker build -t cygnetops/multi-worker-10-14 ./worker
 
-      # Push all services/projects Images to Docker Hub
-      - run: docker push cygnetops/multi-client-10-14
-      - run: docker push cygnetops/multi-nginx-10-14
-      - run: docker push cygnetops/multi-server-10-14
-      - run: docker push cygnetops/multi-worker-10-14
+      # # Push all services/projects Images to Docker Hub
+      # - run: docker push cygnetops/multi-client-10-14
+      # - run: docker push cygnetops/multi-nginx-10-14
+      # - run: docker push cygnetops/multi-server-10-14
+      # - run: docker push cygnetops/multi-worker-10-14
