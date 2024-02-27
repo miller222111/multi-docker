@@ -13,7 +13,7 @@ jobs:
       - run: docker login -u ${{ secrets.DOCKER_USERNAME}} -p ${{ secrets.DOCKER_PASSWORD }}
       
       # Build test version of React project (can easily add other services here)
-      - run: docker build -t cygnetops/react-test -f ./client/Dockerfile.dev
+      - run: docker build -t cygnetops/react-test -f ./client/Dockerfile.dev ./client
       
       # Run tests on React project test version (can easily add other services here)
       - run: docker run -e CI=true cygnetops/react-test npm test
