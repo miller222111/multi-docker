@@ -41,7 +41,6 @@ jobs:
           application_name: multi-docker
           environment_name: Multi-docker-env
           existing_bucket_name: elasticbeanstalk-us-gov-west-1-108514116999
-          bucket_path: "docker-multi"
           region: us-gov-west-1
           version_label: ${{ github.sha }}
           deployment_package: deploy.zip
