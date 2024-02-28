@@ -19,13 +19,13 @@ jobs:
       - run: docker run -e CI=true cygnetops/react-test npm test
       
       # Build Prod versions of all of our projects if tests pass
-      - run: docker build -t cygnetops/multi-client-10-14 ./client
-      - run: docker build -t cygnetops/multi-nginx-10-14 ./nginx
-      - run: docker build -t cygnetops/multi-server-10-14 ./server
-      - run: docker build -t cygnetops/multi-worker-10-14 ./worker
+      - run: docker build -t miller222111/multi-client-10-14 ./client
+      - run: docker build -t miller222111/multi-nginx-10-14 ./nginx
+      - run: docker build -t miller222111/multi-server-10-14 ./server
+      - run: docker build -t miller222111/multi-worker-10-14 ./worker
 
       # Push all services/projects Images to Docker Hub
-      - run: docker push cygnetops/multi-client-10-14
-      - run: docker push cygnetops/multi-nginx-10-14
-      - run: docker push cygnetops/multi-server-10-14
-      - run: docker push cygnetops/multi-worker-10-14
+      - run: docker push miller222111/multi-client-10-14
+      - run: docker push miller222111/multi-nginx-10-14
+      - run: docker push miller222111/multi-server-10-14
+      - run: docker push miller222111/multi-worker-10-14
