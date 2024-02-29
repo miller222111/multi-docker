@@ -18,5 +18,5 @@ RUN npm run build
 # We now want to copy the build folder to nginx
 FROM nginx
 EXPOSE 3000
-COPY ./nginx/default.conf /ect/nginx/conf.d/default.conf
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/build /usr/share/nginx/html
