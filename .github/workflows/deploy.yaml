@@ -31,8 +31,7 @@ jobs:
       - run: docker push miller222111/multi-server
       - run: docker push miller222111/multi-worker
 
-      # Logout of Docker
-      - run: docker logout
+
 
       # - name: Generate deployment package
       #   run: zip -r deploy.zip . -x '*.git*'
@@ -48,3 +47,6 @@ jobs:
       #     region: us-gov-west-1
       #     version_label: ${{ github.sha }}
       #     deployment_package: deploy.zip
+
+      # Logout of Docker
+      - run: docker logout
