@@ -12,25 +12,27 @@ jobs:
       # Specify Docker as dependency
       # - run: docker login -u ${{ secrets.DOCKER_USERNAME}} -p ${{ secrets.DOCKER_PASSWORD }}
       - run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USERNAME}} --password-stdin
-      - run: docker logout
 
       # Build test version of React project (can easily add other services here)
-      # - run: docker build -t miller222111/react-test -f ./client/Dockerfile.dev ./client
+      - run: docker build -t miller222111/react-test -f ./client/Dockerfile.dev ./client
       
-      # # Run tests on React project test version (can easily add other services here)
-      # - run: docker run -e CI=true miller222111/react-test npm test
+      # Run tests on React project test version (can easily add other services here)
+      - run: docker run -e CI=true miller222111/react-test npm test
       
-      # # Build Prod versions of all of our projects if tests pass
-      # - run: docker build -t miller222111/multi-client-10-14 ./client
-      # - run: docker build -t miller222111/multi-nginx-10-14 ./nginx
-      # - run: docker build -t miller222111/multi-server-10-14 ./server
-      # - run: docker build -t miller222111/multi-worker-10-14 ./worker
+      # Build Prod versions of all of our projects if tests pass
+      - run: docker build -t miller222111/multi-client ./client
+      - run: docker build -t miller222111/multi-nginx ./nginx
+      - run: docker build -t miller222111/multi-server ./server
+      - run: docker build -t miller222111/multi-worker ./worker
 
-      # # Push all services/projects Images to Docker Hub
-      # - run: docker push miller222111/multi-client-10-14
-      # - run: docker push miller222111/multi-nginx-10-14
-      # - run: docker push miller222111/multi-server-10-14
-      # - run: docker push miller222111/multi-worker-10-14
+      # Push all services/projects Images to Docker Hub
+      - run: docker push miller222111/multi-client
+      - run: docker push miller222111/multi-nginx
+      - run: docker push miller222111/multi-server
+      - run: docker push miller222111/multi-worker
+
+      # Logout of Docker
+      - run: docker logout
 
       # - name: Generate deployment package
       #   run: zip -r deploy.zip . -x '*.git*'
