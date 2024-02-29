@@ -10,37 +10,38 @@ jobs:
     steps: 
       - uses: actions/checkout@v3
       # Specify Docker as dependency
-      - run: docker login -u ${{ secrets.DOCKER_USERNAME}} -p ${{ secrets.DOCKER_PASSWORD }}
-      
+      # - run: docker login -u ${{ secrets.DOCKER_USERNAME}} -p ${{ secrets.DOCKER_PASSWORD }}
+      - run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USERNAME}} --password-stdin
+
       # Build test version of React project (can easily add other services here)
-      - run: docker build -t miller222111/react-test -f ./client/Dockerfile.dev ./client
+      # - run: docker build -t miller222111/react-test -f ./client/Dockerfile.dev ./client
       
-      # Run tests on React project test version (can easily add other services here)
-      - run: docker run -e CI=true miller222111/react-test npm test
+      # # Run tests on React project test version (can easily add other services here)
+      # - run: docker run -e CI=true miller222111/react-test npm test
       
-      # Build Prod versions of all of our projects if tests pass
-      - run: docker build -t miller222111/multi-client-10-14 ./client
-      - run: docker build -t miller222111/multi-nginx-10-14 ./nginx
-      - run: docker build -t miller222111/multi-server-10-14 ./server
-      - run: docker build -t miller222111/multi-worker-10-14 ./worker
+      # # Build Prod versions of all of our projects if tests pass
+      # - run: docker build -t miller222111/multi-client-10-14 ./client
+      # - run: docker build -t miller222111/multi-nginx-10-14 ./nginx
+      # - run: docker build -t miller222111/multi-server-10-14 ./server
+      # - run: docker build -t miller222111/multi-worker-10-14 ./worker
 
-      # Push all services/projects Images to Docker Hub
-      - run: docker push miller222111/multi-client-10-14
-      - run: docker push miller222111/multi-nginx-10-14
-      - run: docker push miller222111/multi-server-10-14
-      - run: docker push miller222111/multi-worker-10-14
+      # # Push all services/projects Images to Docker Hub
+      # - run: docker push miller222111/multi-client-10-14
+      # - run: docker push miller222111/multi-nginx-10-14
+      # - run: docker push miller222111/multi-server-10-14
+      # - run: docker push miller222111/multi-worker-10-14
 
-      - name: Generate deployment package
-        run: zip -r deploy.zip . -x '*.git*'
+      # - name: Generate deployment package
+      #   run: zip -r deploy.zip . -x '*.git*'
 
-      - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v18
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-          application_name: multi-docker
-          environment_name: Multi-docker-env
-          existing_bucket_name: elasticbeanstalk-us-gov-west-1-108514116999
-          region: us-gov-west-1
-          version_label: ${{ github.sha }}
-          deployment_package: deploy.zip
+      # - name: Deploy to EB
+      #   uses: einaregilsson/beanstalk-deploy@v18
+      #   with:
+      #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+      #     aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+      #     application_name: multi-docker
+      #     environment_name: Multi-docker-env
+      #     existing_bucket_name: elasticbeanstalk-us-gov-west-1-108514116999
+      #     region: us-gov-west-1
+      #     version_label: ${{ github.sha }}
+      #     deployment_package: deploy.zip
